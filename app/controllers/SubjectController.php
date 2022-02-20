@@ -65,16 +65,14 @@ class SubjectController
 
     public function saveEdit($id)
     {
-        $model = Subject::where('id', '=', $id)->first();
+        $model = Subject::find($id);
+
         if (!$model) {
             header('location: ' . BASE_URL . 'dashboard/mon-hoc');
             die;
         }
-
-        $data = [
-            'name' => $_POST['name']
-        ];
-        $model->update($data);
+        $model->name = $_POST['name'];
+        $model->save();
         header('location: ' . BASE_URL . 'dashboard/mon-hoc');
         die;
     }

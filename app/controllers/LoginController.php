@@ -23,10 +23,12 @@ class LoginController
     public function saveAccount()
     {
         $model = new User();
+        $password = $_POST['password'];
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $data = [
             'name' => $_POST['name'],
             'email' => $_POST['email'],
-            'password' => $_POST['password']
+            'password' => $passwordHash,
         ];
         $model->insert($data);
         header('location: ' . BASE_URL . 'tai-khoan/dang-nhap');
@@ -98,7 +100,7 @@ class LoginController
         $password = $_POST['password'];
 
         $user = User::where('email', $email)->first();
-        if ($user && ($password == $user->password)) {
+        if ($user && password_verify($password, $user->password)) {
             $_SESSION['auth'] = [
                 "id" => $user->id,
                 "name" => $user->name,

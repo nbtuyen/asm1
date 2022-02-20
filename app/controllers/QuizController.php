@@ -30,9 +30,8 @@ class QuizController
     {
         include_once "./app/admin/quiz/add-quiz.php";
     }
-    public function editQuiz()
+    public function editQuiz($id)
     {
-        $id = $_GET['id'];
         $quiz = Quiz::where('id', '=', $id)->first();
         $questions = Question::where('quiz_id', '=', $quiz->id)->get();
         include_once './app/admin/quiz/edit-quiz.php';
@@ -52,7 +51,6 @@ class QuizController
 
     public function saveQuiz($id)
     {
-
         $data = [
             'name' => $_POST['name'],
             'start_time' => $_POST['start_time'],
@@ -63,31 +61,30 @@ class QuizController
             'subject_id' => $id
         ];
         $model = new Quiz();
-        $quiz = $model->insert($data);
-        header('location: ' . BASE_URL . 'dashboard/quiz/' . $quiz->id);
+        $model->insert($data);
+        header('location: ' . BASE_URL . 'quiz/cap-nhat?id=' . $id);
         die;
     }
 
-    public function saveEditQuiz()
+    public function saveEditQuiz($id)
     {
-        $id = $_GET['id'];
-        $model = Quiz::where(['id', '=', $id])->first();
+        $model = Quiz::find($id);
         if (!$model) {
-            header('location: ' . BASE_URL . 'dashboard/quiz');
+            header('location: ' . BASE_URL . 'dashboard/mon-hoc');
             die;
         }
 
-        $data = [
-            'name' => $_POST['name'],
-            'name' => $_POST['name'],
-            'start_time' => $_POST['start_time'],
-            'end_time' => $_POST['end_time'],
-            'duration_minutes' => $_POST['duration_minutes'],
-            'status' => isset($_POST['status']) ? 1 : 0,
-            'is_shuffle' => isset($_POST['is_shuffle']) ? 1 : 0,
-        ];
-        $model->update($data);
-        header('location: ' . BASE_URL . 'dashboard/quiz');
+
+        $model->name = $_POST['name'];
+        $model->name = $_POST['name'];
+        $model->start_time = $_POST['start_time'];
+        $model->end_time = $_POST['end_time'];
+        $model->duration_minutes = $_POST['duration_minutes '];
+        $model->status = isset($_POST['status ']) ? 1 : 0;
+        $model->is_shuffle = isset($_POST['is_shuffle']) ? 1 : 0;
+
+        $model->save();
+        header('location: ' . BASE_URL . 'quiz/cap-nhat/' . $id);
         die;
     }
 

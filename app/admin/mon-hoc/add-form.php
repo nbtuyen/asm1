@@ -9,7 +9,7 @@
                 <form action="" method="post">
                     <div class="col-6 offset-3">
                         <div class="form-group">
-                            <label for="">Tên danh mục bài viết</label>
+                            <label for="">Tên Môn Học</label>
                             <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId">
                         </div>
 

@@ -36,7 +36,7 @@
                                 <td><?= $sq->duration_minutes ?></td>
                                 <td><?= $sq->is_shuffle == 1 ? "Có" : "Không" ?></td>
                                 <td>
-                                    <a href="<?= BASE_URL . 'quiz/cap-nhat?id=' . $sq->id ?>" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="<?= BASE_URL . 'quiz/cap-nhat/' . $sq->id ?>" class="btn btn-sm btn-primary">Sửa</a>
                                     &nbsp;
                                     <a href="<?= BASE_URL . 'quiz/xoa/' . $sq->id ?>" class="btn btn-sm btn-danger">Xóa</a>
                                 </td>

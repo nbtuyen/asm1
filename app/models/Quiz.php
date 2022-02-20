@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
     protected $table = 'quizs';
+    public $timestamps = false;
     public function subject()
     {
         $subject = Subject::where('id', '=', $this->subject_id)->first();

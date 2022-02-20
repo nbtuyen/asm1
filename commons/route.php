@@ -25,7 +25,7 @@ function applyRoute($url)
     });
 
     //mon-hoc
-    $router->group(['prefix' => 'mon-hoc', 'before' => 'auth'], function ($router) {
+    $router->group(['prefix' => 'mon-hoc'], function ($router) {
         $router->get('tao-moi', [SubjectController::class, 'addForm']);
         $router->post('tao-moi', [SubjectController::class, 'saveAdd']);
         $router->get('chi-tiet', [QuizController::class, 'subjectDetail']);
@@ -83,8 +83,8 @@ function applyRoute($url)
         $router->get('chi-tiet', [QuestionController::class, 'questDetail']);
         $router->get('tao-moi/{id}', [QuizController::class, 'addQuiz']);
         $router->post('tao-moi/{id}', [QuizController::class, 'saveQuiz']);
-        $router->get('cap-nhat', [QuizController::class, 'editQuiz']);
-        $router->post('cap-nhat', [QuizController::class, 'saveEditQuiz']);
+        $router->get('cap-nhat/{id}', [QuizController::class, 'editQuiz']);
+        $router->post('cap-nhat/{id}', [QuizController::class, 'saveEditQuiz']);
         $router->get('xoa/{id}', [QuizController::class, 'remove']);
     });
 
