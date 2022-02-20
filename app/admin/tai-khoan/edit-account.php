@@ -16,13 +16,9 @@
                             <label for="">Tên tài khoản</label>
                             <input type="text" name="name" value="<?= $model->name ?>">
                         </div>
-                        <div class="form-group">
-                            <label for="">Avatar</label>
-                            <input type=" text" name="avatar" value="<?= $model->avatar ?>">
-                        </div>
                         <div>
                             <label for="">Mật khẩu</label>
-                            <input type=" password" name="password" value="<?= $model->password ?>">
+                            <input type=" password" name="password" value=" " ?>">
                         </div>
                         <br>
                         <div class="">

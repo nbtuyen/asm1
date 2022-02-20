@@ -21,12 +21,11 @@ class QuestionController
         }
         include_once './app/admin/question/edit-form.php';
     }
-    public function QuestDetail()
+    public function questDetail($id)
     {
-        $id = $_GET['id'];
-        $quest = Question::where(['quiz_id', '=', $id])->get();
+        $quest = Question::where('quiz_id', '=', $id)->get();
         if (!$quest) {
-            header('location: ' . $_SERVER['HTTP_REFERER']);
+            header('location: ' . BASE_URL . 'quiz/chi-tiet/' . $id);
             die;
         }
         include_once './app/views/quiz/quizDetail.php';

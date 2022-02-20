@@ -36,9 +36,8 @@ class QuizController
         $questions = Question::where('quiz_id', '=', $quiz->id)->get();
         include_once './app/admin/quiz/edit-quiz.php';
     }
-    public function subjectDetail()
+    public function subjectDetail($id)
     {
-        $id = $_GET['id'];
         $model = Quiz::where('subject_id', '=', $id)->get();
         if (!$model) {
             header('location: ' . BASE_URL . 'mon-hoc');
