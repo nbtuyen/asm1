@@ -83,9 +83,9 @@ class AnswerController
         die;
     }
 
-    public function remove()
+    public function remove($id)
     {
-        $id = $_GET['id'];
+
         Answer::destroy($id);
         header('location: ' . $_SERVER['HTTP_REFERER']);
         die;

@@ -53,11 +53,13 @@
                         <div class="col-6">
                             <ul class="list-group" style="margin-bottom:50px;">
                                 <li class="list-group-item active" aria-current="true">
-                                    Câu hỏi số: <?= $index + 1 ?>: <?= $qu->name ?><button type="button" id="openAddAnswerModal" class="btn btn-success">Thêm đáp án</button><a href="<?= BASE_URL . 'question/xoa/' . $qu->id ?>" class="btn btn-danger" style="margin-left:20px">Xóa</a>
+                                    Câu hỏi số: <?= $index + 1 ?>:<?= $qu->name ?><button type="button" id="openAddAnswerModal" class="btn btn-success">Thêm đáp án</button><a href="<?= BASE_URL . 'question/xoa/' . $qu->id ?>" class="btn btn-danger" style="margin-left:20px">Xóa</a>
                                 </li>
                                 <?php foreach ($qu->getAnswers() as $ansIndex => $ans) : ?>
                                     <li class="list-group-item">
-                                        Đáp án <?= $ansIndex + 1  ?>: <strong><?= $ans->content ?></strong><b style="margin-left:295px"><?php if ($ans->is_correct == 1) echo "đúng" ?></b>
+                                        <div style="float:left">Đáp án <?= $ansIndex + 1  ?>:
+                                        </div>
+                                        <div style="display:flex;justify-content: space-between;"><strong><?= $ans->content ?></strong><?php if ($ans->is_correct == 1) echo "đúng" ?> <a href="<?= BASE_URL . 'answer/xoa/' . $ans->id ?>" class="btn btn-sm btn-danger">Xóa</a></div>
                                     </li>
                                 <?php endforeach ?>
                             </ul>
@@ -73,10 +75,10 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="<?= BASE_URL . 'answer/luu-tao-moi' ?>" method="post">
-                                            <h3>Đáp án <button type="button" id="add_answer" class="btn btn-sm btn-success">Thêm đáp án</button></h3>
+                                            <h3>Đáp án </h3>
                                             <table>
                                                 <thead>
-                                                    <th style="width: 80%;">Nội dung</th>
+                                                    <th style="width: 80%">Nội dung</th>
                                                     <th>Đáp án đúng</th>
                                                 </thead>
                                                 <tbody id="answer_list">
@@ -175,5 +177,6 @@
 <style>
     #openAddAnswerModal {
         margin-left: 100px;
+
     }
 </style>
