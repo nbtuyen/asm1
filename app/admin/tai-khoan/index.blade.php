@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Danh Sách Môn Học </h1>
+                <h1 class="m-0">Danh Sách Tài Khoản </h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -21,26 +21,29 @@
                 <table class="table tabl-stripped">
                     <thead>
                         <th>STT</th>
-                        <th>Tên Môn học</th>
-                        <th>
-                            <a href="<?= BASE_URL . 'mon-hoc/tao-moi' ?>" class="btn btn-sm btn-success">Tạo mới</a>
-                        </th>
+                        <th>Tên Tài Khoản</th>
+                        <th>Email</th>
+                        <th>Mật khẩu</th>
+                        <th></th>
                     </thead>
                     <tbody>
-                        <?php foreach ($subjects as $index => $sub) : ?>
+                        @foreach ($users as $index => $user) 
                             <tr>
                                 <td><?= $index + 1 ?></td>
-                                <td><a href="<?= BASE_URL . 'dashboard/quiz/' . $sub->id ?>" style="text-decoration:none;color:black"><?= $sub->name ?></a></td>
+                                <td><?= $user->name ?></td>
+                                <td><?= $user->email ?></td>
+                                <td><?= $user->password ?></td>
                                 <td>
-                                    <a href="<?= BASE_URL . 'mon-hoc/cap-nhat/' . $sub->id ?>" class="btn btn-sm btn-primary">
+                                    <a href="{{<?= BASE_URL . 'dashboard/tai-khoan/cap-nhat/' . $user->id ?>}}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="<?= BASE_URL . 'mon-hoc/xoa/' . $sub->id ?>" class="btn btn-sm btn-danger">
+
+                                    <a href="{{BASE_URL . 'tai-khoan/xoa/' . $user->id }}" class="btn btn-sm btn-danger">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

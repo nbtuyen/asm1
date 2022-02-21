@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Môn Học : <?= $subject->name ?> </h1>
+        <h1 class="m-0">Môn Học : {{ $subject->name }} </h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
             </div><!-- /.col -->
@@ -23,25 +23,25 @@
                         <th>Thời gian làm bài</th>
                         <th>Đảo câu</th>
                         <th>
-                            <a href="<?= BASE_URL . 'quiz/tao-moi/' . $subject->id ?>" class="btn btn-sm btn-success">Tạo mới</a>
+                            <a href="{{ BASE_URL . 'quiz/tao-moi/' . $subject->id }}" class="btn btn-sm btn-success">Tạo mới</a>
                         </th>
                     </thead>
                     <tbody>
-                        <?php foreach ($subjectQuizs as $sq) : ?>
+                        @foreach($subjectQuizs as $sq)
                             <tr>
                                 <td scope="row"><?= $sq->name ?></td>
-                                <td><?= $sq->start_time ?></td>
-                                <td><?= $sq->end_time ?></td>
-                                <td><?= $sq->status == 1 ? "Active" : "Inactive" ?></td>
-                                <td><?= $sq->duration_minutes ?></td>
-                                <td><?= $sq->is_shuffle == 1 ? "Có" : "Không" ?></td>
+                                <td>{{ $sq->start_time }}</td>
+                                <td>{{ $sq->end_time }}</td>
+                                <td>{{ $sq->status == 1 ? "Active" : "Inactive" }}</td>
+                                <td>{{ $sq->duration_minutes }}</td>
+                                <td>{{ $sq->is_shuffle == 1 ? "Có" : "Không" }}</td>
                                 <td>
-                                    <a href="<?= BASE_URL . 'quiz/cap-nhat/' . $sq->id ?>" class="btn btn-sm btn-primary">Sửa</a>
+                                    <a href="{{ BASE_URL . 'quiz/cap-nhat/' . $sq->id }}" class="btn btn-sm btn-primary">Sửa</a>
                                     &nbsp;
-                                    <a href="<?= BASE_URL . 'quiz/xoa/' . $sq->id ?>" class="btn btn-sm btn-danger">Xóa</a>
+                                    <a href="{{ BASE_URL . 'quiz/xoa/' . $sq->id }}" class="btn btn-sm btn-danger">Xóa</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        @endforeach 
 
                     </tbody>
                 </table>

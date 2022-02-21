@@ -9,16 +9,25 @@ class LoginController
     public function index()
     {
         $users = User::all();
-        include_once "./app/admin/tai-khoan/index.php";
+        return admin(
+            'tai-khoan.index',
+            ['users' => $users]
+        );
     }
 
     public function login()
     {
-        include_once "./app/views/tai-khoan/login.php";
+        return view(
+            'tai-khoan.login',
+            []
+        );
     }
     public function addAccount()
     {
-        include_once "./app/views/tai-khoan/dang-ki.php";
+        return view(
+            'tai-khoan.dang-ki',
+            [],
+        );
     }
     public function saveAccount()
     {
@@ -83,7 +92,10 @@ class LoginController
             header('location: ' . BASE_URL . 'dashboard/tai-khoan');
             die;
         }
-        include_once './app/admin/tai-khoan/edit-account.php';
+        return admin(
+            'tai-khoan.edit-account',
+            ['model' => $model]
+        );
     }
     public function editAccountView($id)
     {
@@ -92,7 +104,12 @@ class LoginController
             header('location: ' . BASE_URL . 'mon-hoc');
             die;
         }
-        include_once './app/views/tai-khoan/edit-account.php';
+        return view(
+            'tai-khoan.edit-account',
+            [
+                'model' => $model
+            ],
+        );
     }
     public function checkLogin()
     {

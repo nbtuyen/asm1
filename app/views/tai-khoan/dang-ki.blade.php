@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Đăng nhập</title>
+<title>Đăng kí</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
@@ -95,7 +95,8 @@
     }
 
     #signup .inputs input[type=email],
-    input[type=password] {
+    input[type=password],
+    input[type=name] {
         background: #f5f5f5;
         font-size: 0.8rem;
         -moz-border-radius: 3px;
@@ -104,8 +105,25 @@
         border: none;
         padding: 13px 10px;
         width: 356px;
-
         box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.1);
+        clear: both;
+
+
+    }
+
+    #signup .inputs input[type=email]:focus,
+    input[type=password]:focus,
+    input[type=name]:focus {
+        background: #fff;
+        box-shadow: 0px 0px 0px 3px #fff38e, inset 0px 2px 3px rgba(0, 0, 0, 0.2), 0px 5px 5px rgba(0, 0, 0, 0.15);
+        outline: none;
+    }
+
+    #signup .inputs .checkboxy {
+        display: block;
+        position: static;
+        height: 25px;
+        margin-top: 10px;
         clear: both;
     }
 
@@ -119,21 +137,6 @@
 
     .IPpass {
         height: 75px;
-    }
-
-    #signup .inputs input[type=email]:focus,
-    input[type=password]:focus {
-        background: #fff;
-        box-shadow: 0px 0px 0px 3px #fff38e, inset 0px 2px 3px rgba(0, 0, 0, 0.2), 0px 5px 5px rgba(0, 0, 0, 0.15);
-        outline: none;
-    }
-
-    #signup .inputs .checkboxy {
-        display: block;
-        position: static;
-        height: 25px;
-        margin-top: 10px;
-        clear: both;
     }
 
     #signup .inputs input[type=checkbox] {
@@ -205,14 +208,14 @@
     <div id="container-login">
         <div class="boxleft">
             <div class="w3-container">
-                <h2>Slideshow Indicators</h2>
-                <p>An example of using buttons to indicate how many slides there are in the slideshow, and which slide the user is currently viewing.</p>
+                <h2>QUIZ</h2>
+                <p>Chào Mừng</p>
             </div>
 
             <div class="w3-content" style="width:100%">
-                <div class="mySlides" style="width:100%;height:500px"><img src="<?= IMG_URL . 'banner3.jpg' ?>" alt="" style="width:100%"></div>
-                <div class="mySlides" style="width:100%;height:500px"><img src="<?= IMG_URL . 'banner1.png' ?>" alt="" style="width:100%"></div>
-                <div class="mySlides" style="width:100%;height:500px"><img src="<?= IMG_URL . 'banner2.png' ?>" alt="" style="width:100%"></div>
+                <div class="mySlides" style="width:100%;height:500px;"><img src="<?= IMG_URL . 'banner3.jpg' ?>" alt="" style="width:100%"></div>
+                <div class="mySlides" style="width:100%;height:500px;"><img src="<?= IMG_URL . 'banner2.png' ?>" alt="" style="width:100%"></div>
+                <div class="mySlides" style="width:100%;height:500px;"><img src="<?= IMG_URL . 'banner1.png' ?>" alt="" style="width:100%"></div>
             </div>
 
             <div class="w3-center">
@@ -238,25 +241,31 @@
                         <div class="IPemail"><input type="email" name="email" id="email" placeholder=" e-mail" autofocus />
                             <span id="emailSpan" style="color:red"></span>
                         </div>
+                        <div class="IPname">
+                            <input type="name" name="name" id="name" placeholder="Name" />
+                            <span id="nameSpan" style="color:red"></span>
+                        </div>
                         <div class="IPpass">
                             <input type="password" name="password" id="password" placeholder="Password" />
                             <span id="passSpan" style="color:red"></span>
                         </div>
                         <div class="checkboxy">
-                            <label class="terms">Chưa có tài khoản</label><a href="<?= BASE_URL . 'tai-khoan/dang-ki' ?>" style="text-decoration: none;font-style: italic;">Đăng Kí</a>
+                            <label class="terms">Đã có tài khoản</label><a href="{{ BASE_URL . 'tai-khoan/dang-nhap' }}" style="text-decoration: none;font-style: italic;">Đăng Nhâp</a>
                         </div>
-                        <button type="submit" id="submit">Đăng Nhập</button>
+                        <button type="submit" id="submit">Đăng Kí</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
     <script>
         var email = document.querySelector("#email");
         var valEmail = document.querySelector("#emailSpan");
+        var ten = document.querySelector("#name");
+        var valName = document.querySelector("#nameSpan");
         var pass = document.querySelector("#password");
         var valPass = document.querySelector("#passSpan");
-        var btn = document.querySelector("#submit");
         email.onblur = function() {
             var val1 = this.value;
             var pattern1 = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -267,6 +276,14 @@
                 valEmail.innerText = "";
             }
 
+        }
+        ten.onblur = function() {
+            var val5 = this.value;
+            if (val5 === "") {
+                valName.innerText = "Nhập tên";
+            } else {
+                valName.innerText = "";
+            }
         }
         pass.onblur = function() {
             var val4 = this.value;

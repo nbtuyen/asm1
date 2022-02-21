@@ -38,7 +38,7 @@
                         </div>
                         <br>
                         <div class="">
-                            <a href="<?= BASE_URL . 'dashboard/quiz/' ?>" class="btn btn-sm btn-danger">Hủy</a>
+                            <a href="{{ BASE_URL . 'dashboard/quiz/' }}" class="btn btn-sm btn-danger">Hủy</a>
                             &nbsp;
                             <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
                         </div>

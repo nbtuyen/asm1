@@ -14,33 +14,51 @@ class SubjectController
     {
         if (empty($id)) {
             $subjects = Subject::all();
-            include_once "./app/views/mon-hoc/index.php";
+            return view(
+                'mon-hoc.index',
+                [
+                    'subjects' => $subjects
+                ],
+            );
         } else {
             $subject = Subject::where('id', '=', $id)->first();
             $quizs = Quiz::where('subject_id', '=', $id)->get();
-            include_once "./app/views/mon-hoc/index.php";
+            return view(
+                'mon-hoc.index',
+                [
+                    'subjects' => $subject,
+                    'quizs ' => $quizs
+                ],
+            );
         }
     }
     public function dashoardSubject($id = null)
     {
         if (empty($id)) {
             $subjects = Subject::all();
-            include_once "./app/admin/mon-hoc/index.php";
+            return admin(
+                'mon-hoc.index',
+                ['subjects' => $subjects]
+            );
         } else {
             $subject = Subject::where('id', '=', $id)->first();
             $quizs = Quiz::where('subject_id', '=', $id)->get();
-            include_once "./app/admin/mon-hoc/index.php";
+            return admin(
+                'mon-hoc.index',
+                [
+                    'subjects' => $subject,
+                    'quizs ' => $quizs
+                ],
+            );
         }
-    }
-    public function subject_id()
-    {
-        $subjects = Subject::all();
-        include_once "./app/admin/mon-hoc/edit-form.php";
     }
 
     public function addForm()
     {
-        include_once "./app/admin/mon-hoc/add-form.php";
+        return admin(
+            'mon-hoc.add-form',
+            [],
+        );
     }
     public function editForm($id)
     {
@@ -49,7 +67,12 @@ class SubjectController
             header('location: ' . BASE_URL . 'dashboard/mon-hoc');
             die;
         }
-        include_once './app/admin/mon-hoc/edit-form.php';
+        return admin(
+            'mon-hoc.edit-form',
+            [
+                'model' => $model,
+            ],
+        );
     }
 
     public function saveAdd()

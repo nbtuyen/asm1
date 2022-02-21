@@ -10,11 +10,11 @@
                     <div class="col-6 offset-3">
                         <div class="form-group">
                             <label for="">Tên Môn Học</label>
-                            <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId" value="<?= $model->name ?>">
+                            <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId" value="{{ $model->name }}">
                         </div>
                         <br>
                         <div class="">
-                            <a href=" <?= BASE_URL . 'dashboard/mon-hoc' ?>" class="btn btn-sm btn-danger">Hủy</a>
+                            <a href=" {{ BASE_URL . 'dashboard/mon-hoc' }}" class="btn btn-sm btn-danger">Hủy</a>
                             &nbsp;
                             <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
                         </div>

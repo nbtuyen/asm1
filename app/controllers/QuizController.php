@@ -11,7 +11,12 @@ class QuizController
     public function index()
     {
         $quizs = Quiz::all();
-        include_once "./app/views/quiz/index.php";
+        return view(
+            'quiz.index',
+            [
+                'quizs' => $quizs
+            ],
+        );
     }
     public function dashboardQuiz($id)
     {
@@ -24,17 +29,32 @@ class QuizController
         // 2. lấy danh sách quiz của môn học đó ra
         $subjectQuizs = Quiz::where('subject_id', '=', $subject->id)->get();
 
-        include_once "./app/admin/quiz/index.php";
+        return admin(
+            'quiz.index',
+            [
+                'subject' => $subject,
+                'subjectQuizs' => $subjectQuizs
+            ]
+        );
     }
     public function addQuiz($id)
     {
-        include_once "./app/admin/quiz/add-quiz.php";
+        return admin(
+            'quiz.add-quiz',
+            []
+        );
     }
     public function editQuiz($id)
     {
         $quiz = Quiz::where('id', '=', $id)->first();
         $questions = Question::where('quiz_id', '=', $quiz->id)->get();
-        include_once './app/admin/quiz/edit-quiz.php';
+        return admin(
+            'quiz.edit-quiz',
+            [
+                'questions' => $questions,
+                'quiz' => $quiz
+            ]
+        );
     }
     public function subjectDetail($id)
     {
@@ -43,7 +63,12 @@ class QuizController
             header('location: ' . BASE_URL . 'mon-hoc');
             die;
         }
-        include_once './app/views/quiz/subjectDetail.php';
+        return view(
+            'quiz.subjectDetail',
+            [
+                'model' => $model,
+            ],
+        );
     }
 
 
@@ -61,7 +86,7 @@ class QuizController
         ];
         $model = new Quiz();
         $model->insert($data);
-        header('location: ' . BASE_URL . 'quiz/cap-nhat?id=' . $id);
+        header('location: ' . BASE_URL . 'quiz/cap-nhat/' . $id);
         die;
     }
 

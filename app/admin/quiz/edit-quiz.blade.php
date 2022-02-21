@@ -10,19 +10,19 @@
                     <div class="col-6 offset-3">
                         <div class="form-group">
                             <label for="">Tên Quiz</label>
-                            <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId" value="<?= $quiz->name ?>">
+                            <input type="text" name="name" class="form-control" placeholder="" aria-describedby="helpId" value="{{ $quiz->name}}">
                         </div>
                         <div class="form-group">
                             <label for="">Thời gian bắt đầu</label>
-                            <input type="datetime-local" name="start_time" value="<?= date('Y-m-d\TH:i', strtotime($quiz->start_time)) ?>" class="form-control">
+                            <input type="datetime-local" name="start_time" value="{{ date('Y-m-d\TH:i', strtotime($quiz->start_time)) }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Thời gian kết thúc </label>
-                            <input type="datetime-local" name="end_time" value="<?= date('Y-m-d\TH:i', strtotime($quiz->end_time)) ?>" class="form-control">
+                            <input type="datetime-local" name="end_time" value="{{ date('Y-m-d\TH:i', strtotime($quiz->end_time)) }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="">Thời gian làm bài</label>
-                            <input type="number" step="0" name="duration_minutes" value="<?= $quiz->duration_minutes ?>" class="form-control">
+                            <input type="number" step="0" name="duration_minutes" value="{{ $quiz->duration_minutes }}" class="form-control">
                         </div>
                         <div class="form-check mt-3s">
                             <input class="form-check-input" name="status" <?php if ($quiz->status == 1) echo "checked" ?> type="checkbox" value="1" id="status">
@@ -38,7 +38,7 @@
                         </div>
                         <br>
                         <div class="">
-                            <a href="<?= BASE_URL . 'dashboard/quiz' ?>" class="btn btn-sm btn-danger">Hủy</a>
+                            <a href="{{ BASE_URL . 'dashboard/quiz' }}" class="btn btn-sm btn-danger">Hủy</a>
                             &nbsp;
                             <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
                         </div>
@@ -49,19 +49,19 @@
             <div class="col-10 offset-1">
                 <button type="button" id="openAddQuestionModal" class="btn btn-success">Thêm câu hỏi</button>
                 <div class="row mt-3">
-                    <?php foreach ($questions as $index => $qu) : ?>
+                    @foreach($questions as $index => $qu)
                         <div class="col-6">
                             <ul class="list-group" style="margin-bottom:50px;">
                                 <li class="list-group-item active" aria-current="true">
-                                    Câu hỏi số: <?= $index + 1 ?>:<?= $qu->name ?><button type="button" id="openAddAnswerModal" class="btn btn-success">Thêm đáp án</button><a href="<?= BASE_URL . 'question/xoa/' . $qu->id ?>" class="btn btn-danger" style="margin-left:20px">Xóa</a>
+                                    Câu hỏi số: {{ $index + 1 }}:{{ $qu->name }}<button type="button" id="openAddAnswerModal" class="btn btn-success">Thêm đáp án</button><a href="{{ BASE_URL . 'question/xoa/' . $qu->id }}" class="btn btn-danger" style="margin-left:20px">Xóa</a>
                                 </li>
-                                <?php foreach ($qu->getAnswers() as $ansIndex => $ans) : ?>
+                                @foreach($qu->getAnswers() as $ansIndex => $ans) 
                                     <li class="list-group-item">
-                                        <div style="float:left">Đáp án <?= $ansIndex + 1  ?>:
+                                        <div style="float:left">Đáp án {{ $ansIndex + 1  }}:
                                         </div>
-                                        <div style="display:flex;justify-content: space-between;"><strong><?= $ans->content ?></strong><?php if ($ans->is_correct == 1) echo "đúng" ?> <a href="<?= BASE_URL . 'answer/xoa/' . $ans->id ?>" class="btn btn-sm btn-danger">Xóa</a></div>
+                                        <div style="display:flex;justify-content: space-between;"><strong>{{ $ans->content }}</strong><?php if ($ans->is_correct == 1) echo "đúng" ?> <a href="{{ BASE_URL . 'answer/xoa/' . $ans->id }}" class="btn btn-sm btn-danger">Xóa</a></div>
                                     </li>
-                                <?php endforeach ?>
+                                @endforeach 
                             </ul>
                         </div>
 
@@ -74,7 +74,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="<?= BASE_URL . 'answer/luu-tao-moi' ?>" method="post">
+                                        <form action="{{ BASE_URL . 'answer/luu-tao-moi' }}" method="post">
                                             <h3>Đáp án </h3>
                                             <table>
                                                 <thead>
@@ -92,7 +92,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <input type="hidden" value="<?= $qu->id ?>" name="question_id">
+                                            <input type="hidden" value="{{ $qu->id }}" name="question_id">
                                             <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-top:7px;">Close</button>
                                             <button type="submit" class="btn btn-primary" style="margin-top:7px;">Save changes</button>
                                         </form>
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach ?>
+                    @endforeach
                 </div>
 
             </div>
@@ -119,7 +119,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= BASE_URL . 'question/luu-tao-moi?quizId=' . $quiz->id ?>" method="post">
+                <form action="{{ BASE_URL . 'question/luu-tao-moi?quizId=' . $quiz->id }}" method="post">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">

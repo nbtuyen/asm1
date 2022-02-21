@@ -3,15 +3,15 @@
 <div class="form">
     <form id="signup" action="" method="post">
         <div class="inputs">
-            <div class="IPemail"><input type="email" name="email" id="email" placeholder=" e-mail" autofocus value=" <?= $model->email ?>" />
+            <div class="IPemail"><input type="email" name="email" id="email" placeholder=" e-mail" autofocus value=" {{ $model->email }}" />
                 <span id="emailSpan" style="color:red"></span>
             </div>
             <div class="IPname">
-                <input type="name" name="name" id="name" placeholder="Name" value=" <?= $model->name ?>" />
+                <input type="name" name="name" id="name" placeholder="Name" value=" {{ $model->name }}" />
                 <span id=" nameSpan" style="color:red"></span>
             </div>
             <div class="IPpass">
-                <input type="password" name="password" id="password" placeholder="Password" value=" <?= $model->password ?>" />
+                <input type="password" name="password" id="password" placeholder="Password" value=" {{ $model->password }}" />
                 <span id=" passSpan" style="color:red"></span>
             </div>
             <button type="submit" id="submit">Cập nhật</button>

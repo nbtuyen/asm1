@@ -19,7 +19,13 @@ class QuestionController
             header('location: ' . BASE_URL . 'question');
             die;
         }
-        include_once './app/admin/question/edit-form.php';
+        return admin(
+            'question.edit-form',
+            [
+                'model' => $model,
+                'quizs ' => $quizs
+            ],
+        );
     }
     public function questDetail($id)
     {
@@ -28,7 +34,12 @@ class QuestionController
             header('location: ' . BASE_URL . 'quiz/chi-tiet/' . $id);
             die;
         }
-        include_once './app/views/quiz/quizDetail.php';
+        return view(
+            'quiz.quizDetail',
+            [
+                'quest' => $quest
+            ],
+        );
     }
 
     public function saveQuest()
