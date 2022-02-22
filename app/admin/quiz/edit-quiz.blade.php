@@ -53,8 +53,46 @@
                         <div class="col-6">
                             <ul class="list-group" style="margin-bottom:50px;">
                                 <li class="list-group-item active" aria-current="true">
-                                    Câu hỏi số: {{ $index + 1 }}:{{ $qu->name }}<button type="button" id="openAddAnswerModal" class="btn btn-success">Thêm đáp án</button><a href="{{ BASE_URL . 'question/xoa/' . $qu->id }}" class="btn btn-danger" style="margin-left:20px">Xóa</a>
+                                    Câu hỏi số: {{ $index + 1 }}:{{ $qu->name }}<button type="button" id="openAddAnswerModal<?=$index + 1?>" class="btn btn-success">Thêm đáp án</button><a href="{{ BASE_URL . 'question/xoa/' . $qu->id }}" class="btn btn-danger" style="margin-left:20px">Xóa</a>
                                 </li>
+                                <div class="modal fade" id="addAnswerModal<?=$index + 1?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tạo đáp án</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ BASE_URL . 'answer/luu-tao-moi' }}" method="post">
+                                                <h3>Đáp án </h3>
+                                                <table>
+                                                    <thead>
+                                                        <th style="width: 80%">Nội dung</th>
+                                                        <th>Đáp án đúng</th>
+                                                    </thead>
+                                                    <tbody id="answer_list">
+                                                        <tr>
+                                                            <td style="width: 80%;">
+                                                                <input type="text" class="form-control" name="content">
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-check-input" onchange="correctAnswerChange(this)" name="is_correct" type="checkbox" value="1" id="status" style="    margin-left: 40px;margin-top:7px;">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <input type="hidden" value="{{ $qu->id }}" name="question_id">
+                                                <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-top:7px;">Close</button>
+                                                <button type="submit" class="btn btn-primary" style="margin-top:7px;">Save changes</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>        
+                                
                                 @foreach($qu->getAnswers() as $ansIndex => $ans) 
                                     <li class="list-group-item">
                                         <div style="float:left">Đáp án {{ $ansIndex + 1  }}:
@@ -63,52 +101,15 @@
                                     </li>
                                 @endforeach 
                             </ul>
-                        </div>
-
-                        <div class="modal fade" id="addAnswerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tạo đáp án</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{ BASE_URL . 'answer/luu-tao-moi' }}" method="post">
-                                            <h3>Đáp án </h3>
-                                            <table>
-                                                <thead>
-                                                    <th style="width: 80%">Nội dung</th>
-                                                    <th>Đáp án đúng</th>
-                                                </thead>
-                                                <tbody id="answer_list">
-                                                    <tr>
-                                                        <td style="width: 80%;">
-                                                            <input type="text" class="form-control" name="content">
-                                                        </td>
-                                                        <td>
-                                                            <input class="form-check-input" onchange="correctAnswerChange(this)" name="is_correct" type="checkbox" value="1" id="status" style="    margin-left: 40px;margin-top:7px;">
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <input type="hidden" value="{{ $qu->id }}" name="question_id">
-                                            <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-top:7px;">Close</button>
-                                            <button type="submit" class="btn btn-primary" style="margin-top:7px;">Save changes</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
                     @endforeach
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="addQuestionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -155,10 +156,12 @@
         addQuestionModel.show();
     })
 
-    var addAnswerModel = new bootstrap.Modal(document.getElementById('addAnswerModal'), options)
-    $("#openAddAnswerModal").click(function() {
-        addAnswerModel.show();
+    <?php foreach ($questions as $index => $qu) : ?>
+    var addAnswerModel<?=$index + 1?> = new bootstrap.Modal(document.getElementById('addAnswerModal<?=$index + 1?>'), options)
+    $("#openAddAnswerModal<?=$index + 1?>").click(function() {
+        addAnswerModel<?=$index + 1?>.show();
     })
+    <?php endforeach ?>
 
 
     function correctAnswerChange(el) {

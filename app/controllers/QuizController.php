@@ -86,7 +86,7 @@ class QuizController
         ];
         $model = new Quiz();
         $model->insert($data);
-        header('location: ' . BASE_URL . 'quiz/cap-nhat/' . $id);
+        header('location: ' . BASE_URL . 'dashboarh/quiz/ ' . $id);
         die;
     }
 
